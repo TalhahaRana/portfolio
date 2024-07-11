@@ -1,0 +1,76 @@
+<!-- ---
+const API_KEY = '8dc6d41710f44671e3d24314de9727fe';
+const LOCATION = 'Lahore';
+
+const fetchWeather = async (location: string) => {
+  try {
+    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&APPID=${API_KEY}`);
+    if (!response.ok) throw new Error('No weather found.');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    return null;
+  }
+};
+
+const weatherData = await fetchWeather(LOCATION);
+
+---
+
+<div id="weather" class="flex items-center">
+  {weatherData ? (
+    <>
+      <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt={weatherData.weather[0].description} class="w-12 h-12" />
+      <span class="ml-2">{weatherData.main.temp}°C</span>
+      <span class="ml-2">{weatherData.weather[0].description}</span>
+    </>
+  ) : (
+    <span>Error loading weather data</span>
+  )}
+</div>
+
+<style>
+  #weather {
+    color: rgb(109 40 217);
+  }
+</style> -->
+
+
+---
+const API_KEY = '8dc6d41710f44671e3d24314de9727fe';
+const LOCATION = 'Lahore';
+
+const fetchWeather = async (location: string) => {
+  try {
+    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&APPID=${API_KEY}`);
+    if (!response.ok) throw new Error('No weather found.');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+    return null;
+  }
+};
+
+const weatherData = await fetchWeather(LOCATION);
+
+---
+
+<div id="weather" class="flex items-center">
+  {weatherData ? (
+    <>
+      <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt={weatherData.weather[0].description} class="w-12 h-12" />
+      <span class="ml-2">{Math.round(weatherData.main.temp)}°C</span>
+      <span class="ml-2">{weatherData.weather[0].description}</span>
+    </>
+  ) : (
+    <span>Error loading weather data</span>
+  )}
+</div>
+
+<style>
+  #weather {
+    color: rgb(109 40 217);
+  }
+</style>
